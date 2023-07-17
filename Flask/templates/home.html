@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>LIBRARY MANAGEMENT SYSTEM</title>
+		<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+	</head>
+	<body>
+		<h1>LIBRARY Managment SYSTEM</h1>
+		
+		<h4>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+						{{ message }}
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		</h4>
+		
+		<p><a href="{{url_for('addUsers')}}">Add Users</a></p>
+		<table>
+			<tr>
+				<th>BOOKID</th>
+				<th>BOOKNAME</th>
+				<th>AUTHOR</th>
+				<th>USERNAME</th>
+				<th>RENTVALUE</th>
+				<th>PENDINGSTATUS</th>
+			</tr>
+			{% for data in datas %}
+				<tr>
+					<td>{{data.BOOKID}}</td>
+					<td>{{data.BOOKNAME}}</td>
+					<td>{{data.AUTHOR}}</td>
+					<td>{{data.USERNAME}}</td>
+					<td><a href="{{url_for('editUser',bookid=data.BOOKID)}}">RENTVALUE</a></td>
+					<td><a onclick="return confirm('Are you sure to delete?');" href="{{url_for('deleteUser',bookid=data.BOOKID)}}">PENDINGSTATUS</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>
